@@ -3,7 +3,7 @@ require_relative 'lib/session_rememberable/version'
 Gem::Specification.new do |spec|
   spec.name          = "session_rememberable"
   spec.version       = SessionRememberable::VERSION
-  spec.authors       = ["Michael"]
+  spec.authors       = ["wynk182"]
   spec.email         = ["wynk182@gmail.com"]
 
   spec.summary       = "Quick concern for session variables"
