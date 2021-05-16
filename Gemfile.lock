@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     session_rememberable (0.2.1)
+      activesupport
 
 GEM
   remote: https://rubygems.org/
@@ -25,7 +26,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport
   rake (~> 12.0)
   session_rememberable!
 
