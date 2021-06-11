@@ -1,8 +1,6 @@
 # SessionRememberable
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/session_rememberable`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Quick gem for remembering and forgetting data in a session.
 
 ## Installation
 
@@ -22,15 +20,57 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Incluce SessionRememberable concern in your application controller and define some keys to remember.
 
-## Development
+```ruby
+class ApplicationController < ActionController::Base
+  include SessionRememberable
+    
+  remember :cart
+  remember :customer, class_name: 'User'
+  remember :visits, static_data: true
+end
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+In your controllers
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+class CustomersController < ApplicationController
 
-## Contributing
+  def create
+    customer = User.new(permitted_params)
+    
+    if customer.save
+      remember_customer customer
+      redirect_to customer
+    else
+      render :new
+    end
+  end
+  
+  def destroy
+    customer = User.find(params[:id])
+    
+    if customer.destroy
+      forget_customer
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/session_rememberable.
+  private
 
+    def permitted_params
+      params.require(:customer).permit(:name, :email)
+    end
+end
+```
+
+In your views (.html.haml)
+
+```ruby
+%h1
+  Welcome
+  = current_customer.name
+```
