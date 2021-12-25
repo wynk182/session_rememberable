@@ -25,7 +25,7 @@ Incluce SessionRememberable concern in your application controller and define so
 ```ruby
 class ApplicationController < ActionController::Base
   include SessionRememberable
-    
+
   remember :cart
   remember :customer, class_name: 'User'
   remember :visits, static_data: true
@@ -39,7 +39,7 @@ class CustomersController < ApplicationController
 
   def create
     customer = User.new(permitted_params)
-    
+
     if customer.save
       remember_customer customer
       redirect_to customer
@@ -47,10 +47,10 @@ class CustomersController < ApplicationController
       render :new
     end
   end
-  
+
   def destroy
     customer = User.find(params[:id])
-    
+
     if customer.destroy
       forget_customer
       redirect_to root_path

@@ -22,5 +22,18 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_runtime_dependency 'actionpack'
+
   spec.add_dependency 'activesupport'
+
+  spec.add_development_dependency 'codecov'
+  spec.add_development_dependency 'dotenv'
+  spec.add_development_dependency 'rails'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rspec-rails'
+  spec.add_development_dependency 'sqlite3'
+  # rubocop dependencies...
+  spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'vcr'
 end
