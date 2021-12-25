@@ -74,3 +74,15 @@ In your views (.html.haml)
   Welcome
   = current_customer.name
 ```
+
+## Initializer
+
+`config/initializers/session_store.rb`
+
+```ruby
+Rails.application.config.session_store SessionRememberable::Store, {
+  rememberable_options: {
+    permanent: true
+  }
+}
+```
