@@ -6,4 +6,11 @@ class CartsController < ApplicationController
 
     redirect_to cart
   end
+
+  def destroy
+    cart = Cart.find(params[:id])
+    cart.destroy!
+
+    forget cart
+  end
 end

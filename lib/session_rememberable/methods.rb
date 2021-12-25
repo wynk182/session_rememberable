@@ -17,8 +17,10 @@ module SessionRememberable
   end
 
   def remember(object, name=nil)
+    key = "current_#{name || object.class}".downcase
     data = object.respond_to?(:id) ? object.id : object.to_s
-    session["current_#{name || object.class}".downcase] = data
+    session[key] = data
+    instance_variable_set "@#{key}", object
   end
 
   def forget(object, name=nil)
