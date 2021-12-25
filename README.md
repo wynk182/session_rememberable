@@ -41,7 +41,7 @@ class CustomersController < ApplicationController
     customer = User.new(permitted_params)
 
     if customer.save
-      remember_customer customer
+      remember customer
       redirect_to customer
     else
       render :new
@@ -52,7 +52,7 @@ class CustomersController < ApplicationController
     customer = User.find(params[:id])
 
     if customer.destroy
-      forget_customer
+      forget customer
       redirect_to root_path
     else
       render :edit
