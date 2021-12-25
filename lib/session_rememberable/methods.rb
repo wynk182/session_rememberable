@@ -1,4 +1,6 @@
 module SessionRememberable
+  extend ActiveSupport::Concern
+
   module ClassMethods
     def remember(key, class_name: nil, static_data: false)
       define_method(:"current_#{key}") do
